@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Soluciones Tecnológicas Profesionales – Reparación de equipos electrónicos, desarrollo web y programación personalizada.">
+<meta name="theme-color" content="#000000">
+<title>TechPro – Soluciones Tecnológicas Profesionales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #000000;
+    --void: #0A0A0A;
+    --surface: #1C1C1E;
+    --surface2: #2C2C2E;
+    --white: #FFFFFF;
+    --muted: #A1A1AA;
+    --muted2: #6B6B72;
+    --accent: #FFFFFF;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.15);
+    --glow: rgba(255,255,255,0.04);
+    --wa-green: #25D366;
+    --wa-dark: #128C7E;
+    --font-display: 'DM Sans', sans-serif;
+    --font-serif: 'Instrument Serif', serif;
+    --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ─── SCROLLBAR ─────────────────────────────── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 2px; }
+
+  /* ─── NAVBAR ─────────────────────────────────── */
+  #navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth), box-shadow 0.4s;
+    border-bottom: 1px solid transparent;
+  }
+  #navbar.scrolled {
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-color: var(--border);
+    box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--white);
+    font-weight: 600; font-size: 1.1rem; letter-spacing: -0.02em;
+  }
+  .nav-logo-icon {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, #fff 0%, #888 100%);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #000;
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.875rem; font-weight: 400;
+    transition: color 0.2s; letter-spacing: 0.01em;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    font-size: 0.8rem; font-weight: 400;
+    cursor: pointer; transition: all 0.2s; font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+  .btn-ghost:hover { border-color: var(--border-hover); color: var(--white); background: var(--glow); }
+
+  .btn-primary {
+    background: var(--white); color: var(--black);
+    border: none; padding: 0.55rem 1.4rem;
+    border-radius: 100px;
+    font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; transition: all 0.25s var(--ease-smooth);
+    font-family: var(--font-display); letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: rgba(255,255,255,0.9); transform: scale(1.02); }
+
+  .btn-wa {
+    background: var(--wa-green);
+    color: #fff; border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 100px;
+    font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; transition: all 0.25s var(--ease-smooth);
+    font-family: var(--font-display);
+    display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none; letter-spacing: 0.01em;
+  }
+  .btn-wa:hover { background: #22c55e; transform: translateY(-2px); box-shadow: 0 20px 60px rgba(37,211,102,0.3); }
+  .btn-wa svg { flex-shrink: 0; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white); border: 1px solid var(--border-hover);
+    padding: 0.9rem 2rem;
+    border-radius: 100px;
+    font-size: 0.95rem; font-weight: 400;
+    cursor: pointer; transition: all 0.25s;
+    font-family: var(--font-display);
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none;
+  }
+  .btn-outline:hover { background: var(--glow); border-color: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+  /* ─── MOBILE NAV ─────────────────────────────── */
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 8px; background: none; border: none;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 1.5px;
+    background: var(--white); border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(0,0,0,0.97);
+    backdrop-filter: blur(20px);
+    padding: 5rem 2rem 2rem;
+    flex-direction: column; gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--white); text-decoration: none;
+    font-size: 1.5rem; font-weight: 300; letter-spacing: -0.02em;
+    border-bottom: 1px solid var(--border); padding-bottom: 1.5rem;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--muted); }
+  .mobile-close {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: none; border: none; color: var(--white);
+    font-size: 1.5rem; cursor: pointer;
+  }
+
+  /* ─── SECTIONS COMMON ────────────────────────── */
+  section { position: relative; overflow: hidden; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 500;
+    background: var(--glow); border: 1px solid var(--border);
+    padding: 0.4rem 1rem; border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 6px; height: 6px;
+    background: var(--white); border-radius: 50%; opacity: 0.5;
+  }
+
+  /* ─── HERO ───────────────────────────────────── */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding-top: 64px;
+    background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255,255,255,0.04) 0%, transparent 70%);
+  }
+
+  .hero-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+    padding: 6rem 0;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 500; margin-bottom: 2rem;
+  }
+  .hero-tag-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--wa-green); animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 600; line-height: 1.06;
+    letter-spacing: -0.04em; margin-bottom: 1.5rem;
+  }
+  .hero-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.5) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.05rem; line-height: 1.7; color: var(--muted);
+    max-width: 480px; margin-bottom: 3rem; font-weight: 300;
+  }
+
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .hero-stat-num {
+    font-size: 1.75rem; font-weight: 600; letter-spacing: -0.04em;
+  }
+  .hero-stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+  /* Hero Visual */
+  .hero-visual {
+    position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .hero-orb {
+    width: 420px; height: 420px; border-radius: 50%;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-orb::before {
+    content: ''; position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.06) 0%, transparent 70%);
+    border: 1px solid var(--border);
+  }
+  .hero-orb::after {
+    content: ''; position: absolute; inset: -40px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 70%);
+    border: 1px solid rgba(255,255,255,0.03);
+    animation: rotate 20s linear infinite;
+  }
+  @keyframes rotate { to { transform: rotate(360deg); } }
+
+  .hero-device {
+    width: 260px; height: 340px;
+    background: var(--surface);
+    border-radius: 24px; border: 1px solid var(--border-hover);
+    display: flex; flex-direction: column;
+    overflow: hidden; position: relative; z-index: 1;
+    box-shadow: 0 60px 120px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .device-header {
+    height: 36px; background: var(--surface2);
+    display: flex; align-items: center; padding: 0 16px; gap: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .device-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .device-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .device-line {
+    height: 8px; border-radius: 4px; background: var(--surface2);
+    animation: shimmer 2s infinite;
+  }
+  @keyframes shimmer {
+    0%,100%{opacity:0.5} 50%{opacity:1}
+  }
+  .device-line.w-full { width: 100%; }
+  .device-line.w-3q { width: 75%; }
+  .device-line.w-half { width: 50%; }
+  .device-line.w-2q { width: 30%; }
+  .device-card {
+    background: var(--surface2); border-radius: 12px;
+    border: 1px solid var(--border); padding: 12px;
+    margin-top: 6px;
+  }
+  .device-card-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: rgba(255,255,255,0.1); margin-bottom: 8px;
+    display: flex; align-items: center; justify-content: center; font-size: 12px;
+  }
+
+  .floating-chip {
+    position: absolute; background: rgba(28,28,30,0.9);
+    border: 1px solid var(--border-hover); border-radius: 12px;
+    padding: 10px 14px; font-size: 0.75rem;
+    backdrop-filter: blur(10px); display: flex; align-items: center; gap: 8px;
+    z-index: 2; white-space: nowrap;
+  }
+  .chip-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--wa-green); }
+  .fc-1 { top: 10%; right: -10%; animation: float 4s ease-in-out infinite; }
+  .fc-2 { bottom: 15%; left: -10%; animation: float 4s ease-in-out infinite 2s; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+  /* ─── SERVICES ───────────────────────────────── */
+  #servicios { padding: 7rem 0; background: var(--void); }
+
+  .services-header { text-align: center; margin-bottom: 4rem; }
+  .section-title {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 600; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 1rem;
+  }
+  .section-sub { font-size: 1rem; color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+  .services-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .service-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px; padding: 2.5rem;
+    transition: border-color 0.3s, transform 0.3s var(--ease-smooth);
+    position: relative; overflow: hidden;
+  }
+  .service-block:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+  .service-block::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top left, rgba(255,255,255,0.03) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .service-block-header {
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
+  }
+  .service-icon-big {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .service-block-title {
+    font-size: 1.2rem; font-weight: 600; letter-spacing: -0.02em;
+  }
+  .service-block-sub { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+  .services-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .service-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0.65rem 0.75rem;
+    border-radius: 10px; background: rgba(255,255,255,0.02);
+    border: 1px solid transparent;
+    transition: all 0.2s; cursor: default;
+    font-size: 0.875rem; color: var(--muted);
+  }
+  .service-item:hover { background: rgba(255,255,255,0.04); border-color: var(--border); color: var(--white); }
+  .service-item-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--muted2); flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .service-item:hover .service-item-dot { background: var(--white); }
+
+  /* ─── TECH STACK ─────────────────────────────── */
+  #tecnologias { padding: 6rem 0; }
+
+  .tech-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1rem; margin-top: 3rem;
+  }
+  .tech-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.75rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s var(--ease-smooth);
+    cursor: default; position: relative; overflow: hidden;
+  }
+  .tech-card:hover { border-color: var(--border-hover); transform: translateY(-4px); background: var(--surface2); }
+  .tech-card:hover .tech-icon { transform: scale(1.1); }
+  .tech-icon {
+    font-size: 2rem; margin-bottom: 0.75rem; display: block;
+    transition: transform 0.3s var(--ease-spring);
+    line-height: 1;
+  }
+  .tech-name { font-size: 0.9rem; font-weight: 600; letter-spacing: -0.01em; }
+  .tech-type { font-size: 0.72rem; color: var(--muted); margin-top: 4px; }
+
+  /* ─── CATALOG ─────────────────────────────────── */
+  #catalogo { padding: 7rem 0; background: var(--void); }
+
+  .catalog-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1rem; margin-top: 3rem;
+  }
+  .catalog-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.75rem;
+    transition: all 0.3s var(--ease-smooth); display: flex; flex-direction: column;
+  }
+  .catalog-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+  .catalog-card-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; margin-bottom: 1rem;
+  }
+  .catalog-card-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .catalog-card-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; flex: 1; }
+  .catalog-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--wa-green); margin: 1rem 0 1.25rem;
+  }
+  .catalog-badge::before {
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--wa-green); animation: pulse 2s infinite;
+  }
+  .catalog-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: rgba(37,211,102,0.08); border: 1px solid rgba(37,211,102,0.2);
+    color: var(--wa-green); padding: 0.65rem 1rem;
+    border-radius: 10px; font-size: 0.8rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+    font-family: var(--font-display);
+  }
+  .catalog-btn:hover { background: rgba(37,211,102,0.15); border-color: rgba(37,211,102,0.4); }
+
+  /* ─── WHY ME ──────────────────────────────────── */
+  #ventajas { padding: 6rem 0; }
+
+  .why-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1rem; margin-top: 3rem;
+  }
+  .why-card {
+    padding: 1.75rem; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 16px;
+    transition: all 0.3s;
+  }
+  .why-card:hover { border-color: var(--border-hover); background: var(--surface2); }
+  .why-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(255,255,255,0.05); display: flex;
+    align-items: center; justify-content: center; font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .why-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .why-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.65; }
+
+  /* ─── CTA ─────────────────────────────────────── */
+  #cta {
+    padding: 8rem 0;
+    background: radial-gradient(ellipse 100% 80% at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 70%);
+    border-top: 1px solid var(--border);
+  }
+  .cta-inner { text-align: center; max-width: 700px; margin: 0 auto; }
+  .cta-title {
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    font-weight: 600; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 1.5rem;
+  }
+  .cta-title span { color: var(--muted); }
+  .cta-sub {
+    font-size: 1rem; color: var(--muted); line-height: 1.7; margin-bottom: 3rem;
+  }
+  .btn-wa-giant {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--wa-green); color: #fff;
+    padding: 1.2rem 3rem; border-radius: 100px;
+    font-size: 1.1rem; font-weight: 600; text-decoration: none;
+    transition: all 0.3s var(--ease-smooth); font-family: var(--font-display);
+    box-shadow: 0 0 0 0 rgba(37,211,102,0.4);
+    animation: wa-pulse 3s infinite;
+  }
+  @keyframes wa-pulse {
+    0%,100%{box-shadow: 0 0 0 0 rgba(37,211,102,0.4)}
+    50%{box-shadow: 0 0 0 20px rgba(37,211,102,0)}
+  }
+  .btn-wa-giant:hover { background: #22c55e; transform: scale(1.04); }
+
+  .cta-info {
+    margin-top: 2rem; font-size: 0.8rem; color: var(--muted2);
+    display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+  }
+
+  /* ─── FOOTER ──────────────────────────────────── */
+  footer {
+    background: var(--void); border-top: 1px solid var(--border);
+    padding: 4rem 0 2rem;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+  .footer-brand-name {
+    font-size: 1rem; font-weight: 600; letter-spacing: -0.02em;
+    display: flex; align-items: center; gap: 8px; margin-bottom: 1rem;
+  }
+  .footer-brand-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.7; max-width: 260px; }
+  .footer-col-title { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted2); margin-bottom: 1.25rem; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+  .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+    font-size: 0.75rem; color: var(--muted2);
+  }
+  .footer-socials { display: flex; gap: 1rem; }
+  .footer-social {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; color: var(--muted); text-decoration: none;
+    transition: all 0.2s;
+  }
+  .footer-social:hover { border-color: var(--border-hover); color: var(--white); }
+
+  /* ─── MODAL ───────────────────────────────────── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border-hover);
+    border-radius: 24px; padding: 2.5rem;
+    width: 100%; max-width: 420px;
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.35s var(--ease-spring);
+    position: relative;
+  }
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+  .modal-close {
+    position: absolute; top: 1.25rem; right: 1.25rem;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    color: var(--muted); width: 32px; height: 32px; border-radius: 8px;
+    font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+  .modal-title { font-size: 1.4rem; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 0.4rem; }
+  .modal-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 2rem; }
+  .modal-field { margin-bottom: 1rem; }
+  .modal-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; display: block; font-weight: 500; }
+  .modal-input {
+    width: 100%; background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 0.75rem 1rem; color: var(--white);
+    font-size: 0.9rem; font-family: var(--font-display);
+    transition: border-color 0.2s; outline: none;
+  }
+  .modal-input:focus { border-color: var(--border-hover); }
+  .modal-input::placeholder { color: var(--muted2); }
+  .modal-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+  .modal-check { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--muted); cursor: pointer; }
+  .modal-link { font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .modal-link:hover { color: var(--white); }
+  .modal-btn {
+    width: 100%; background: var(--white); color: var(--black);
+    border: none; padding: 0.85rem; border-radius: 10px;
+    font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    transition: opacity 0.2s; font-family: var(--font-display);
+  }
+  .modal-btn:hover { opacity: 0.9; }
+
+  /* ─── REVEAL ANIMATIONS ──────────────────────── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+  .reveal-d3 { transition-delay: 0.3s; }
+  .reveal-d4 { transition-delay: 0.4s; }
+
+  /* ─── NOISE OVERLAY ───────────────────────────── */
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none;
+    opacity: 0.015; z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 150px;
+  }
+
+  /* ─── RESPONSIVE ──────────────────────────────── */
+  @media (max-width: 1024px) {
+    .tech-grid { grid-template-columns: repeat(4, 1fr); }
+    .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+  @media (max-width: 768px) {
+    #navbar .nav-links, #navbar .nav-actions { display: none; }
+    .nav-hamburger { display: flex; }
+    .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+    .hero-ctas { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .hero-visual { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .tech-grid { grid-template-columns: repeat(2, 1fr); }
+    .catalog-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    #navbar { padding: 0 1.25rem; }
+    .container { padding: 0 1.25rem; }
+  }
+  @media (max-width: 480px) {
+    .why-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-direction: column; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─────────────────────────── -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">T</div>
+    TechPro
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#hero">Inicio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#catalogo">Catálogo</a></li>
+    <li><a href="#ventajas">Nosotros</a></li>
+    <li><a href="#cta">Contacto</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="btn-ghost" onclick="openModal()">Iniciar Sesión</button>
+    <a href="https://wa.me/123456789?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n." class="btn-primary" target="_blank" rel="noopener">Solicitar Cotización</a>
+  </div>
+
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ─── MOBILE MENU ────────────────────── -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#hero" onclick="toggleMenu()">Inicio</a>
+  <a href="#servicios" onclick="toggleMenu()">Servicios</a>
+  <a href="#catalogo" onclick="toggleMenu()">Catálogo</a>
+  <a href="#ventajas" onclick="toggleMenu()">Nosotros</a>
+  <a href="#cta" onclick="toggleMenu()">Contacto</a>
+  <a href="https://wa.me/123456789?text=Hola%2C%20solicito%20cotizaci%C3%B3n." target="_blank" rel="noopener">💬 WhatsApp</a>
+</div>
+
+<!-- ─── HERO ───────────────────────────── -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag reveal">
+          <div class="hero-tag-dot"></div>
+          Disponible · Respuesta en minutos
+        </div>
+
+        <h1 class="hero-title reveal reveal-d1">
+          <em>Soluciones</em><br>Tecnológicas<br>Profesionales
+        </h1>
+
+        <p class="hero-sub reveal reveal-d2">
+          Reparación especializada de equipos electrónicos, desarrollo web profesional y programación personalizada para personas, negocios y empresas.
+        </p>
+
+        <div class="hero-ctas reveal reveal-d3">
+          <a href="https://wa.me/123456789?text=Hola%2C%20solicito%20una%20cotizaci%C3%B3n." class="btn-wa" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.139.564 4.148 1.55 5.887L0 24l6.3-1.534A11.949 11.949 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.032-1.385l-.361-.214-3.739.979.998-3.648-.235-.374A9.818 9.818 0 1121.818 12 9.828 9.828 0 0112 21.818z"/></svg>
+            Cotizar por WhatsApp
+          </a>
+          <a href="#servicios" class="btn-outline">
+            Ver Servicios
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="hero-stats reveal reveal-d4">
+          <div>
+            <div class="hero-stat-num">200+</div>
+            <div class="hero-stat-label">Equipos reparados</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">50+</div>
+            <div class="hero-stat-label">Proyectos web</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">100%</div>
+            <div class="hero-stat-label">Satisfacción</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual -->
+      <div class="hero-visual reveal reveal-d2">
+        <div class="hero-orb">
+          <div class="hero-device">
+            <div class="device-header">
+              <div class="device-dot" style="background:#ff5f57"></div>
+              <div class="device-dot" style="background:#febc2e"></div>
+              <div class="device-dot" style="background:#28c840"></div>
+            </div>
+            <div class="device-body">
+              <div class="device-line w-3q" style="animation-delay:0s"></div>
+              <div class="device-line w-half" style="animation-delay:0.3s"></div>
+              <div class="device-card">
+                <div class="device-card-icon">🔧</div>
+                <div class="device-line w-full" style="animation-delay:0.6s;height:6px"></div>
+                <div class="device-line w-3q" style="animation-delay:0.9s;height:6px;margin-top:6px"></div>
+              </div>
+              <div class="device-card" style="animation-delay:0.2s">
+                <div class="device-card-icon">💻</div>
+                <div class="device-line w-full" style="animation-delay:0.8s;height:6px"></div>
+                <div class="device-line w-half" style="animation-delay:1.1s;height:6px;margin-top:6px"></div>
+              </div>
+              <div class="device-line w-2q" style="animation-delay:0.5s"></div>
+            </div>
+          </div>
+
+          <div class="floating-chip fc-1">
+            <div class="chip-dot"></div>
+            <span style="font-size:0.7rem;color:#fff">En línea ahora</span>
+          </div>
+          <div class="floating-chip fc-2">
+            <span style="font-size:0.9rem">⚡</span>
+            <span style="font-size:0.7rem;color:var(--muted)">Respuesta rápida</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ───────────────────────── -->
+<section id="servicios">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label reveal">Nuestros Servicios</div>
+      <h2 class="section-title reveal reveal-d1">Todo lo que necesitas<br>en tecnología</h2>
+      <p class="section-sub reveal reveal-d2">Desde reparaciones de hardware hasta soluciones de software a medida. Atención profesional y personalizada.</p>
+    </div>
+
+    <div class="services-grid">
+      <!-- Servicio Técnico -->
+      <div class="service-block reveal">
+        <div class="service-block-header">
+          <div class="service-icon-big">🔧</div>
+          <div>
+            <div class="service-block-title">Servicio Técnico</div>
+            <div class="service-block-sub">Reparación especializada</div>
+          </div>
+        </div>
+        <div class="services-list">
+          <div class="service-item"><div class="service-item-dot"></div>Reparación de Computadores</div>
+          <div class="service-item"><div class="service-item-dot"></div>Reparación de Laptops</div>
+          <div class="service-item"><div class="service-item-dot"></div>Reparación de Celulares</div>
+          <div class="service-item"><div class="service-item-dot"></div>Reparación de Consolas</div>
+          <div class="service-item"><div class="service-item-dot"></div>Reparación de Smart TVs</div>
+          <div class="service-item"><div class="service-item-dot"></div>Reparación de Cámaras</div>
+          <div class="service-item"><div class="service-item-dot"></div>Equipos Electrónicos</div>
+          <div class="service-item"><div class="service-item-dot"></div>Instalaciones Tecnológicas</div>
+        </div>
+      </div>
+
+      <!-- Desarrollo -->
+      <div class="service-block reveal reveal-d1">
+        <div class="service-block-header">
+          <div class="service-icon-big">💻</div>
+          <div>
+            <div class="service-block-title">Desarrollo y Programación</div>
+            <div class="service-block-sub">Software profesional</div>
+          </div>
+        </div>
+        <div class="services-list">
+          <div class="service-item"><div class="service-item-dot"></div>Desarrollo de Páginas Web</div>
+          <div class="service-item"><div class="service-item-dot"></div>Landing Pages</div>
+          <div class="service-item"><div class="service-item-dot"></div>Sitios Corporativos</div>
+          <div class="service-item"><div class="service-item-dot"></div>Sistemas Personalizados</div>
+          <div class="service-item"><div class="service-item-dot"></div>Programación en C++</div>
+          <div class="service-item"><div class="service-item-dot"></div>Programación en Java</div>
+          <div class="service-item"><div class="service-item-dot"></div>Programación en Lua</div>
+          <div class="service-item"><div class="service-item-dot"></div>Soluciones de Software a Medida</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TECH STACK ─────────────────────── -->
+<section id="tecnologias">
+  <div class="container">
+    <div class="section-label reveal">Tecnologías</div>
+    <h2 class="section-title reveal reveal-d1">Capacidades técnicas</h2>
+    <p class="section-sub reveal reveal-d2" style="margin:0 0 0 0;text-align:left">Dominio de las tecnologías más demandadas del mercado actual.</p>
+
+    <div class="tech-grid">
+      <div class="tech-card reveal">
+        <span class="tech-icon">⚡</span>
+        <div class="tech-name">C++</div>
+        <div class="tech-type">Sistemas / Performance</div>
+      </div>
+      <div class="tech-card reveal reveal-d1">
+        <span class="tech-icon">☕</span>
+        <div class="tech-name">Java</div>
+        <div class="tech-type">Backend / Enterprise</div>
+      </div>
+      <div class="tech-card reveal reveal-d2">
+        <span class="tech-icon">🌙</span>
+        <div class="tech-name">Lua</div>
+        <div class="tech-type">Scripting / Juegos</div>
+      </div>
+      <div class="tech-card reveal reveal-d3">
+        <span class="tech-icon">🌐</span>
+        <div class="tech-name">HTML</div>
+        <div class="tech-type">Estructura Web</div>
+      </div>
+      <div class="tech-card reveal">
+        <span class="tech-icon">🎨</span>
+        <div class="tech-name">CSS</div>
+        <div class="tech-type">Diseño / Estilos</div>
+      </div>
+      <div class="tech-card reveal reveal-d1">
+        <span class="tech-icon">🔥</span>
+        <div class="tech-name">JavaScript</div>
+        <div class="tech-type">Frontend / Backend</div>
+      </div>
+      <div class="tech-card reveal reveal-d2">
+        <span class="tech-icon">🔷</span>
+        <div class="tech-name">TypeScript</div>
+        <div class="tech-type">Tipado estático</div>
+      </div>
+      <div class="tech-card reveal reveal-d3">
+        <span class="tech-icon">▲</span>
+        <div class="tech-name">Next.js</div>
+        <div class="tech-type">Framework React</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CATALOG ─────────────────────────── -->
+<section id="catalogo">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label reveal">Catálogo</div>
+      <h2 class="section-title reveal reveal-d1">Servicios disponibles</h2>
+      <p class="section-sub reveal reveal-d2">Solicita cotización directamente por WhatsApp. Sin precios genéricos, cada solución es personalizada.</p>
+    </div>
+
+    <div class="catalog-grid" id="catalogGrid"></div>
+  </div>
+</section>
+
+<!-- ─── WHY ME ─────────────────────────── -->
+<section id="ventajas">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label reveal">¿Por qué elegirnos?</div>
+      <h2 class="section-title reveal reveal-d1">Ventajas que nos diferencian</h2>
+      <p class="section-sub reveal reveal-d2">Cada proyecto recibe atención profesional y compromiso real con resultados.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">🎯</div>
+        <div class="why-title">Atención Personalizada</div>
+        <div class="why-desc">Cada cliente recibe una solución única adaptada a sus necesidades específicas y presupuesto.</div>
+      </div>
+      <div class="why-card reveal reveal-d1">
+        <div class="why-icon">⚙️</div>
+        <div class="why-title">Soluciones a Medida</div>
+        <div class="why-desc">No usamos plantillas genéricas. Cada proyecto se desarrolla desde cero con tecnología actual.</div>
+      </div>
+      <div class="why-card reveal reveal-d2">
+        <div class="why-icon">🌐</div>
+        <div class="why-title">Soporte Remoto y Presencial</div>
+        <div class="why-desc">Asistencia técnica en la modalidad que prefieras: en persona o de forma remota.</div>
+      </div>
+      <div class="why-card reveal reveal-d3">
+        <div class="why-icon">🚀</div>
+        <div class="why-title">Desarrollo Profesional</div>
+        <div class="why-desc">Código limpio, escalable y documentado. Proyectos listos para producción real.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">🔍</div>
+        <div class="why-title">Diagnóstico Técnico</div>
+        <div class="why-desc">Análisis profesional del problema antes de cualquier intervención. Sin sorpresas.</div>
+      </div>
+      <div class="why-card reveal reveal-d1">
+        <div class="why-icon">💬</div>
+        <div class="why-title">Comunicación Directa</div>
+        <div class="why-desc">Sin intermediarios. Hablas directamente con el técnico o desarrollador asignado.</div>
+      </div>
+      <div class="why-card reveal reveal-d2">
+        <div class="why-icon">💡</div>
+        <div class="why-title">Asesoramiento Tecnológico</div>
+        <div class="why-desc">Recomendaciones honestas sobre la mejor solución tecnológica para tu caso.</div>
+      </div>
+      <div class="why-card reveal reveal-d3">
+        <div class="why-icon">⚡</div>
+        <div class="why-title">Respuesta Profesional</div>
+        <div class="why-desc">Tiempos de respuesta rápidos y compromiso con fechas de entrega acordadas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─────────────────────────────── -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="section-label reveal" style="margin:0 auto 2rem; display:table">CTA Principal</div>
+      <h2 class="cta-title reveal reveal-d1">
+        Cuéntame qué necesitas<br><span>y encontremos la mejor</span><br>solución tecnológica
+      </h2>
+      <p class="cta-sub reveal reveal-d2">
+        Respuesta garantizada en minutos. Sin formularios complicados, sin esperas. Solo una conversación directa para resolver tu problema tecnológico.
+      </p>
+      <div class="reveal reveal-d3">
+        <a href="https://wa.me/123456789?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20una%20cotizaci%C3%B3n%20para%20mi%20proyecto." class="btn-wa-giant" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.139.564 4.148 1.55 5.887L0 24l6.3-1.534A11.949 11.949 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.032-1.385l-.361-.214-3.739.979.998-3.648-.235-.374A9.818 9.818 0 1121.818 12 9.828 9.828 0 0112 21.818z"/></svg>
+          Solicitar Cotización por WhatsApp
+        </a>
+      </div>
+      <div class="cta-info reveal reveal-d4">
+        <span>🔒 Sin compromiso</span>
+        <span>⚡ Respuesta inmediata</span>
+        <span>✅ 100% Gratuito</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">
+          <div class="nav-logo-icon" style="width:28px;height:28px;font-size:12px">T</div>
+          TechPro
+        </div>
+        <p class="footer-brand-desc">Soluciones tecnológicas profesionales para personas, negocios y empresas. Reparaciones y desarrollo web.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Servicios</div>
+        <ul class="footer-links">
+          <li><a href="#servicios">Reparación de equipos</a></li>
+          <li><a href="#servicios">Desarrollo web</a></li>
+          <li><a href="#servicios">Programación</a></li>
+          <li><a href="#catalogo">Ver catálogo</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Empresa</div>
+        <ul class="footer-links">
+          <li><a href="#ventajas">Sobre nosotros</a></li>
+          <li><a href="#tecnologias">Tecnologías</a></li>
+          <li><a href="#cta">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contacto</div>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/123456789" target="_blank" rel="noopener">💬 WhatsApp</a></li>
+          <li><a href="mailto:contacto@techpro.com">✉️ Email</a></li>
+          <li><a href="#" target="_blank" rel="noopener">📷 Instagram</a></li>
+          <li><a href="#" target="_blank" rel="noopener">👤 Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 TechPro. Todos los derechos reservados.</span>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" title="Instagram">IG</a>
+        <a href="#" class="footer-social" title="Facebook">FB</a>
+        <a href="https://wa.me/123456789" class="footer-social" title="WhatsApp" target="_blank" rel="noopener">WA</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── LOGIN MODAL ─────────────────────── -->
+<div class="modal-overlay" id="loginModal" onclick="closeModalOutside(event)">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">✕</button>
+    <h2 class="modal-title" id="modalTitle">Bienvenido de nuevo</h2>
+    <p class="modal-sub">Inicia sesión en tu cuenta</p>
+
+    <div class="modal-field">
+      <label class="modal-label" for="email">Correo electrónico</label>
+      <input type="email" id="email" class="modal-input" placeholder="tu@correo.com" autocomplete="email">
+    </div>
+    <div class="modal-field">
+      <label class="modal-label" for="password">Contraseña</label>
+      <input type="password" id="password" class="modal-input" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <div class="modal-row">
+      <label class="modal-check">
+        <input type="checkbox" style="accent-color:#fff"> Recordarme
+      </label>
+      <a href="#" class="modal-link">¿Olvidaste tu contraseña?</a>
+    </div>
+    <button class="modal-btn" onclick="handleLogin()">Iniciar Sesión</button>
+  </div>
+</div>
+
+<script>
+  // ─── NAVBAR SCROLL ──────────────────────
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // ─── MOBILE MENU ────────────────────────
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // ─── MODAL ──────────────────────────────
+  function openModal() {
+    document.getElementById('loginModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('loginModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('loginModal')) closeModal();
+  }
+  function handleLogin() {
+    const email = document.getElementById('email').value;
+    if (!email) { document.getElementById('email').focus(); return; }
+    // Preparado para integración con API
+    alert('Integración con API pendiente. Email: ' + email);
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ─── CATALOG GENERATION ─────────────────
+  const PHONE = '123456789';
+  const catalogItems = [
+    { icon: '🖥️', name: 'Reparación de Computadores', desc: 'Diagnóstico, limpieza, cambio de piezas y optimización de equipos de escritorio.' },
+    { icon: '💻', name: 'Reparación de Laptops', desc: 'Pantallas, teclados, batería, hardware y software para cualquier marca.' },
+    { icon: '📱', name: 'Reparación de Celulares', desc: 'Pantallas, cámaras, batería y reparaciones de placa para smartphones.' },
+    { icon: '🎮', name: 'Reparación de Consolas', desc: 'PS4, PS5, Xbox, Nintendo Switch y más. Diagnóstico especializado.' },
+    { icon: '📺', name: 'Reparación de Smart TVs', desc: 'Pantallas, placas, fuentes de poder y sistema operativo.' },
+    { icon: '📷', name: 'Reparación de Cámaras', desc: 'Cámaras digitales, DSLR y mirrorless. Limpieza y reparación de sensor.' },
+    { icon: '🌐', name: 'Desarrollo Web', desc: 'Páginas web modernas, rápidas y optimizadas para buscadores.' },
+    { icon: '🚀', name: 'Landing Pages', desc: 'Páginas de aterrizaje enfocadas en conversión y captación de clientes.' },
+    { icon: '🏢', name: 'Sitios Corporativos', desc: 'Presencia digital profesional para empresas y negocios establecidos.' },
+    { icon: '⚙️', name: 'Sistemas Personalizados', desc: 'Aplicaciones web y de escritorio a medida según tus necesidades.' },
+    { icon: '🔧', name: 'Instalaciones Tecnológicas', desc: 'Redes, cámaras de seguridad, puntos de acceso y más.' },
+    { icon: '📦', name: 'Software a Medida', desc: 'Soluciones de software diseñadas específicamente para tu negocio.' },
+  ];
+
+  const grid = document.getElementById('catalogGrid');
+  catalogItems.forEach((item, i) => {
+    const msg = encodeURIComponent(`Hola, me interesa obtener una cotización para ${item.name}.`);
+    const url = `https://wa.me/${PHONE}?text=${msg}`;
+    const delay = i % 3 === 0 ? '' : i % 3 === 1 ? 'reveal-d1' : 'reveal-d2';
+    grid.innerHTML += `
+      <div class="catalog-card reveal ${delay}">
+        <div class="catalog-card-icon">${item.icon}</div>
+        <div class="catalog-card-name">${item.name}</div>
+        <div class="catalog-card-desc">${item.desc}</div>
+        <div class="catalog-badge">Disponible</div>
+        <a href="${url}" class="catalog-btn" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.139.564 4.148 1.55 5.887L0 24l6.3-1.534A11.949 11.949 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.032-1.385l-.361-.214-3.739.979.998-3.648-.235-.374A9.818 9.818 0 1121.818 12 9.828 9.828 0 0112 21.818z"/></svg>
+          Cotizar por WhatsApp
+        </a>
+      </div>`;
+  });
+
+  // ─── SCROLL REVEAL ──────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  // Observe initial elements
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Observe dynamically generated catalog cards
+  setTimeout(() => {
+    document.querySelectorAll('#catalogGrid .reveal').forEach(el => observer.observe(el));
+  }, 100);
+</script>
+</body>
+</html>
